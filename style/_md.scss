@@ -1,0 +1,11 @@
+@media screen and (max-width: 1199px){
+	main{
+		ul.snacks{
+			list-style-type: none;
+
+			li:nth-of-type(3n+1){
+				clear: left;
+			}
+		}
+	}
+}

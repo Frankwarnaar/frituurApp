@@ -1,0 +1,14 @@
+@import 'common';
+@import 'xs';
+
+@media screen and(min-width:768px){
+	@import 'sm';
+}
+
+@media screen and (min-width: 992px){
+	@import 'md';
+}
+
+@media screen and (min-width: 1200px){
+	@import 'lg';
+}

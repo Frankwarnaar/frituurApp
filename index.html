@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang='nl'>
+<head>
+	<title>Frituur Frank App</title>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src='node_modules/bootstrap/dist/js/bootstrap.min.js'></script>  
+	<script src='node_modules/vue/dist/vue.min.js'></script>
+	<script src='node_modules/vue-router/dist/vue-router.min.js'></script>
+	<link rel='stylesheet' href='node_modules/bootstrap/dist/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='style/style.css'>
+</head>
+<body>
+	<div id='app' class='container-fluid'>
+		<nav class = "navbar navbar-fixed-top navbar-default row" role = "navigation">
+			<div class='container'>
+				<div class = "navbar-header">
+					<a class = "navbar-brand" href='../'>
+						<img src='img/favicon.png'>
+						<!-- <span>Frituur app</span> -->
+					</a>
+					
+					<div class="form-group has-feedback search pull-right col-sm-4 col-lg-3">
+						<input v-on:keyup.esc='clearSearchField' type="text" class="col-xs-12" placeholder="Zoek op product of merk" v-model='searchTerm'>
+						<i class="glyphicon glyphicon-search form-control-feedback"></i>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<main>
+			<header class='row header'>
+				<div class='container'>
+					<h1 class='col-xs-12'>Frituur App</h1>
+					<p class='col-xs-12 col-sm-8'>Franks Frituur App; het antwoord op vragen als 'Hoe lang moeten mijn snacks gefrituurd worden?', 'Op welke temperatuur?' en 'Welke saus moet er bij deze snack?'.</p>
+				</div>
+			</header>
+			<div class='container'>
+				
+				<form class='filters col-xs-12'>
+					<div data-toggle='collapse' data-target='#filtersCollapse' class='collapsed'>
+						<h2>Filters</h2>
+						<i class='glyphicon glyphicon-chevron-down'></i>
+					</div>
+					<div id='filtersCollapse' class="collapse clearfix">
+						<fieldset class='col-xs-12 col-md-3'>
+							<legend>Product</legend>
+							<input v-on:click='clearSearchField' type='checkbox' id='bitterballen' value='Bitterballen' v-model='productFilter'>
+							<label v-on:click='clearSearchField' for='bitterballen'>Bitterballen</label>
+
+							<input v-on:click='clearSearchField' type='checkbox' id='frikandellen' value='Frikandellen' v-model='productFilter'>
+							<label v-on:click='clearSearchField' for='frikandellen'>Frikandellen</label>
+
+							<input v-on:click='clearSearchField' type='checkbox' id='kaassoufles' value='Kaassoufles' v-model='productFilter'>
+							<label v-on:click='clearSearchField' for='kaassoufles'>Kaassoufles</label>
+
+							<input v-on:click='clearSearchField' type='checkbox' id='minisnacks' value='Minisnacks' v-model='productFilter'>
+							<label v-on:click='clearSearchField' for='minisnacks'>Minisnacks</label>
+
+							<input v-on:click='clearSearchField' type='checkbox' id='partymix' value='Partymix' v-model='productFilter'>
+							<label v-on:click='clearSearchField' for='partymix'>Partymix</label>
+
+							<input v-on:click='clearSearchField' type='checkbox' id='vlammetjes' value='Vlammetjes' v-model='productFilter'>
+							<label v-on:click='clearSearchField' for='vlammetjes'>Vlammetjes</label>
+
+							<!-- <label v-on:click='clearSearchField' v-for="snack in snacks | order-by'name' | track-by='snack.name'">
+								<input type='checkbox' value='{{ snack.name }}' v-model='productFilter' value='{{ snack.name }}'>{{ snack.name }}
+							</label> -->
+						</fieldset>
+						<fieldset class='col-xs-12 col-md-3'>
+							<legend>Merk</legend>
+							<input v-on:click='clearSearchField' type='checkbox' id='mora' value='Mora' v-model='brandFilter'>
+							<label v-on:click='clearSearchField' for='mora'>Mora</label>
+
+							<input v-on:click='clearSearchField' type='checkbox' id='golden' value='Golden' v-model='brandFilter'>
+							<label v-on:click='clearSearchField' for='golden'>Golden</label>
+
+							<input v-on:click='clearSearchField' type='checkbox' id='topKing' value='TopKing' v-model='brandFilter'>
+							<label v-on:click='clearSearchField' for='topKing'>TopKing</label>
+							<!-- <label v-on:click='clearSearchField' v-for="snack in snacks | order-by 'brand' | group-by 'brand' | track-by='snack.brand'">
+								<input type='checkbox' value='{{ snack.brand }}' v-model='brandFilter' value='{{ snack.brand }}'>{{ snack.brand }}
+							</label> -->
+						</fieldset>
+					</div>
+				</form>
+				
+				<ul class='clearfix snacks'>
+					<li class='col-xs-12 col-sm-6 col-md-4 col-lg-3' v-for="snack in snacks | filterBy searchTerm in 'name' 'brand' | filterBy productFilter in 'name' | filterBy brandFilter in 'brand' | orderBy 'name' 'brand'">
+						<div class='contentBox'>
+							<section class='snackImg'>
+								<img src='img/{{ snack.img }}' alt='{{ snack.name }}'>
+							</section>
+							<section class='snackInfo'>
+								<h1>{{snack.brand}} {{ snack.name }}</h1>
+								<ul>
+									<li>Tijd: <span class='snackDetail'>{{ snack.time }} min</span></li>
+									<li>Temperatuur: <span class='snackDetail'>{{ snack.temp }} ºC</span></li>
+									<li>Aanbevolen saus: <span class='snackDetail'>{{ snack.sauce }}</span> </li>
+								</ul>
+							</section>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</main>
+	</div>
+
+	<script type='text/javascript' src='js/app.js'></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
 					</a>
 					
 					<div class="form-group has-feedback search pull-right col-sm-4 col-lg-3">
-						<input v-on:keyup.esc='clearSearchField' type="text" class="col-xs-12" placeholder="Zoek op product of merk" v-model='searchTerm'>
+						<input v-on:keyup.esc='clearSearchField' v-on:click='clearFilters' type="text" class="col-xs-12" placeholder="Zoek op product of merk" v-model='searchTerm'>
 						<i class="glyphicon glyphicon-search form-control-feedback"></i>
 					</div>
 				</div>
@@ -30,6 +30,7 @@
 		</nav>
 
 		<main>
+			<a></a>
 			<header class='row header'>
 				<div class='container'>
 					<h1 class='col-xs-12'>Frituur App</h1>
@@ -46,41 +47,15 @@
 					<div id='filtersCollapse' class="collapse clearfix">
 						<fieldset class='col-xs-12 col-md-3'>
 							<legend>Product</legend>
-							<input v-on:click='clearSearchField' type='checkbox' id='bitterballen' value='Bitterballen' v-model='productFilter'>
-							<label v-on:click='clearSearchField' for='bitterballen'>Bitterballen</label>
-
-							<input v-on:click='clearSearchField' type='checkbox' id='frikandellen' value='Frikandellen' v-model='productFilter'>
-							<label v-on:click='clearSearchField' for='frikandellen'>Frikandellen</label>
-
-							<input v-on:click='clearSearchField' type='checkbox' id='kaassoufles' value='Kaassoufles' v-model='productFilter'>
-							<label v-on:click='clearSearchField' for='kaassoufles'>Kaassoufles</label>
-
-							<input v-on:click='clearSearchField' type='checkbox' id='minisnacks' value='Minisnacks' v-model='productFilter'>
-							<label v-on:click='clearSearchField' for='minisnacks'>Minisnacks</label>
-
-							<input v-on:click='clearSearchField' type='checkbox' id='partymix' value='Partymix' v-model='productFilter'>
-							<label v-on:click='clearSearchField' for='partymix'>Partymix</label>
-
-							<input v-on:click='clearSearchField' type='checkbox' id='vlammetjes' value='Vlammetjes' v-model='productFilter'>
-							<label v-on:click='clearSearchField' for='vlammetjes'>Vlammetjes</label>
-
-							<!-- <label v-on:click='clearSearchField' v-for="snack in snacks | order-by'name' | track-by='snack.name'">
-								<input type='checkbox' value='{{ snack.name }}' v-model='productFilter' value='{{ snack.name }}'>{{ snack.name }}
-							</label> -->
+							<label v-on:click='clearSearchField' v-for="product in allProducts | order-by 'name'">
+								<input type='checkbox' value='{{ product }}' v-model='productFilter' value='{{ product }}'>{{ product }}
+							</label>
 						</fieldset>
 						<fieldset class='col-xs-12 col-md-3'>
 							<legend>Merk</legend>
-							<input v-on:click='clearSearchField' type='checkbox' id='mora' value='Mora' v-model='brandFilter'>
-							<label v-on:click='clearSearchField' for='mora'>Mora</label>
-
-							<input v-on:click='clearSearchField' type='checkbox' id='golden' value='Golden' v-model='brandFilter'>
-							<label v-on:click='clearSearchField' for='golden'>Golden</label>
-
-							<input v-on:click='clearSearchField' type='checkbox' id='topKing' value='TopKing' v-model='brandFilter'>
-							<label v-on:click='clearSearchField' for='topKing'>TopKing</label>
-							<!-- <label v-on:click='clearSearchField' v-for="snack in snacks | order-by 'brand' | group-by 'brand' | track-by='snack.brand'">
-								<input type='checkbox' value='{{ snack.brand }}' v-model='brandFilter' value='{{ snack.brand }}'>{{ snack.brand }}
-							</label> -->
+							<label v-on:click='clearSearchField' v-for="brand in allBrands | order-by 'brand'">
+								<input type='checkbox' value='{{ brand }}' v-model='brandFilter' value='{{ brand }}'>{{ brand }}
+							</label>
 						</fieldset>
 					</div>
 				</form>
@@ -105,6 +80,15 @@
 			</div>
 		</main>
 	</div>
+	<footer class=footer>
+		<div class='container'>
+			<ul class='bs-docs-footer-links col-xs-12'>
+				<li><a href='https://www.frankwarnaar.nl'>www.frankwarnaar.nl</a></li>
+				<li><a href='https://github.com/frankwarnaar/frituurApp'>Bekijk broncode</a></li>
+				<li><a href='#app'>Naar boven</a></li>
+			</ul>
+			<p class='clearfix text-muted col-xs-12'>Copyleft 2016 - Frank Warnaar</p>
+		</footer>
 
 	<script type='text/javascript' src='js/app.js'></script>
 </body>

@@ -49,17 +49,45 @@ var snacks = [
 	img: 'topkingVlammetjes.png'}
 ];
 
+function addItemToArray(item, array){
+	var itemInArray = false;
+	for (var i=0; i<array.length; i++){
+		if (array[i] == item){
+			itemInArray=true;
+		}
+	}
+	if (!itemInArray){
+		array.push(item);
+	}
+}
+
+var allProducts = [];
+for (var i=0; i<snacks.length; i++){
+	addItemToArray(snacks[i].name, allProducts);
+}
+
+var allBrands = [];
+for (var i=0; i<snacks.length; i++){
+	addItemToArray(snacks[i].brand, allBrands);
+}
+
 new Vue({
 	el: '#app',
 	data: {
 		snacks: snacks,
 		productFilter: [],
 		brandFilter: [],
+		allProducts: allProducts,
+		allBrands: allBrands,
 		searchTerm: ''
 	},
 	methods: {
 		clearSearchField: function(){
 			this.searchTerm = '';
+		},
+		clearFilters: function(){
+			this.productFilter = [];
+			this.brandFilter = [];
 		}
 	}
 });

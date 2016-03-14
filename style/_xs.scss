@@ -134,6 +134,28 @@ main{
 	}
 }
 
+body>footer{
+	border-top: 1px solid $accentColor;
+	background-color: $backgroundColor;
+	color: $accentColor;
+	padding: 8px 0;
+
+	ul{
+		list-style-type: none;
+		padding-bottom: 32px;
+
+		li{
+			padding: 16px 16px 0 0;
+			margin: 0 auto;
+
+			a{
+				color: $accentColor;
+				font-weight: 500;
+			}
+		}
+	}
+}
+
 @media screen and (max-width: 767px){
 	.col-xs-12{
 		padding: 0;

@@ -47,13 +47,13 @@
 					<div id='filtersCollapse' class="collapse clearfix">
 						<fieldset class='col-xs-12 col-md-3'>
 							<legend>Product</legend>
-							<label v-on:click='clearSearchField' v-for="product in allProducts | order-by 'name'">
+							<label v-on:click='clearSearchField' v-on:click='filterProducts' v-for="product in allProducts | order-by 'name'">
 								<input type='checkbox' value='{{ product }}' v-model='productFilter' value='{{ product }}'>{{ product }}
 							</label>
 						</fieldset>
 						<fieldset class='col-xs-12 col-md-3'>
 							<legend>Merk</legend>
-							<label v-on:click='clearSearchField' v-for="brand in allBrands | order-by 'brand'">
+							<label v-on:click='filterProducts' v-for="brand in allBrands | order-by 'brand'">
 								<input type='checkbox' value='{{ brand }}' v-model='brandFilter' value='{{ brand }}'>{{ brand }}
 							</label>
 						</fieldset>
@@ -64,7 +64,7 @@
 					<li class='col-xs-12 col-sm-6 col-md-4 col-lg-3' v-for="snack in snacks | filterBy searchTerm in 'name' 'brand' | filterBy productFilter in 'name' | filterBy brandFilter in 'brand' | orderBy 'name' 'brand'">
 						<div class='contentBox'>
 							<section class='snackImg'>
-								<img src='img/{{ snack.img }}' alt='{{ snack.name }}'>
+								<img v-bind:src='snack.img' alt='{{ snack.name }}'>
 							</section>
 							<section class='snackInfo'>
 								<h1>{{snack.brand}} {{ snack.name }}</h1>

@@ -4,7 +4,7 @@
 	<title>Frituur Frank App</title>
 	<meta charset='utf-8'>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src='node_modules/bootstrap/dist/js/bootstrap.min.js'></script>  
 	<script src='node_modules/vue/dist/vue.min.js'></script>
 	<script src='node_modules/vue-router/dist/vue-router.min.js'></script>
@@ -22,7 +22,7 @@
 					</a>
 					
 					<div class="form-group has-feedback search pull-right col-sm-4 col-lg-3">
-						<input v-on:keyup.esc='clearSearchField' v-on:click='clearFilters' type="text" class="col-xs-12" placeholder="Zoek op product of merk" v-model='searchTerm'>
+						<input v-on:keyup.esc='clearSearchField' v-on:click='clearFilters' type="text" class="col-xs-12" placeholder="Zoek op product, merk of saus" v-model='searchTerm'>
 						<i class="glyphicon glyphicon-search form-control-feedback"></i>
 					</div>
 				</div>
@@ -57,11 +57,17 @@
 								<input type='checkbox' value='{{ brand }}' v-model='brandFilter' value='{{ brand }}'>{{ brand }}
 							</label>
 						</fieldset>
+						<fieldset class='col-xs-12 col-md-3'>
+							<legend>Saus</legend>
+							<label v-on:click='filterProducts' v-for="sauce in allSauces | order-by 'sauce'">
+								<input type='checkbox' value='{{ sauce }}' v-model='sauceFilter' value='{{ sauce }}'>{{ sauce }}
+							</label>
+						</fieldset>
 					</div>
 				</form>
 				
 				<ul class='clearfix snacks'>
-					<li class='col-xs-12 col-sm-6 col-md-4 col-lg-3' v-for="snack in snacks | filterBy searchTerm in 'name' 'brand' | filterBy productFilter in 'name' | filterBy brandFilter in 'brand' | orderBy 'name' 'brand'">
+					<li class='col-xs-12 col-sm-6 col-md-4 col-lg-3' v-for="snack in snacks | filterBy searchTerm in 'name' 'brand' 'sauce' | filterBy productFilter in 'name' | filterBy brandFilter in 'brand' | filterBy sauceFilter in 'sauce' | orderBy 'name' 'brand'">
 						<div class='contentBox'>
 							<section class='snackImg'>
 								<img v-bind:src='snack.img' alt='{{ snack.name }}'>
